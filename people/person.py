@@ -10,6 +10,6 @@ class Person:
     self.id = json.get('id', None)
     self.name = json.get('name', "")
     self.age = json.get('age', 999)
-    self.number = json.get('number', "")
+    self.number = json.get('number', "").strip()
     self.photo = json.get('photo', "")
     self.bio = json.get('bio', "")
