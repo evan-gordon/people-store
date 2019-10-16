@@ -44,23 +44,10 @@ def get_youngest_people(max_number: int) -> Union[list, dict]:
       people = get_people_by_person_id(
           session, ids_list, keep=validate_person_phone_number
       )
-      print(people)
       if (type(people) == dict): return people
-      # store in youngest list if not full or if curr person age
-      # is less than max person age in list
-      for person in people:
-        if (
-            len(youngest_people) == max_number and
-            person.age < youngest_people[-1][0]
-        ):
-          bisect.insort(youngest_people, (person.age, person))
-          youngest_people.pop()
-        elif (len(youngest_people) < max_number):
-          bisect.insort(youngest_people, (person.age, person))
+      filter_old_people(youngest_people, people, max_number)
   return [person.__dict__ for (age, person) in youngest_people]
 
-# returns list of people
-# can filter using the keep field
 def get_people_by_person_id(
     session: any, ids_list: list, *, keep=lambda x: True
 ):
@@ -90,6 +77,22 @@ def get_people_by_person_id(
       if (keep(person)):
         result.append(person)
   return result
+
+def filter_old_people(youngest_people, people, max_number):
+  """
+  store person in list if 
+  -list is not full or
+  -the current persons age is less than max age in list
+  """
+  for person in people:
+    if (
+        len(youngest_people) == max_number and
+        person.age < youngest_people[-1][0]
+    ):
+      bisect.insort(youngest_people, (person.age, person))
+      youngest_people.pop()
+    elif (len(youngest_people) < max_number):
+      bisect.insort(youngest_people, (person.age, person))
 
 def validate_person_phone_number(person):
   """
