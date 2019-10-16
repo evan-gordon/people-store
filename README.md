@@ -32,13 +32,10 @@ Congratulations! You can now run your server from <localhost:8000>
 
 ## Regarding the Solution
 
-In the scenario where we encounter a dataset that is much larger than we currently have.
-I could store all of the people data into my own database but depending on the arcitecture we could just end up duplicating data, however we would have the advantage of being able to directly query the database.
-Here we would still need to perform some cache validation periodically or with every call to our endpoint in order maintain consistency.
+These are my thoughts regarding the scenario where we encounter a dataset that is much larger than we currently have.<br/>
 
-A simpler solution would be to shard out the work for processing data. Depending on the arcitecture we could store page tokens. We then assign each process a in essence a starting and ending location for processing via the tokens.
-
-Of course at some arbirarily large dataset size our call will eventually time out and we may need to switch to using a websocket for example in order to not cause a timeout in the browser or the aforementioned database solution.
+Ideally, we could move to a more proactive event sourcing architecture. We could use a tool such as Apache Kafka to listen to events and then setup the server containing people to push out updates to this service through a Kafka producer/consumer setup.
+If we however cannot affect the architecture of how we retrieve people data server then the best we could do would be to run a periodic task to query for and cache the data it gets. This way we could at least mitigate the amount of network calls required to get the information we need.
 
 ## Commands Used During Setup
 
