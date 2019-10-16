@@ -22,6 +22,12 @@ pipenv install
 python manage.py runserver
 ```
 
+or to run tests:
+
+```bash
+pytest -q
+```
+
 Congratulations! You can now run your server from <localhost:8000>
 
 ## Regarding the Solution
@@ -39,6 +45,6 @@ Of course at some arbirarily large dataset size our call will eventually time ou
 ```bash
 django-admin startproject peoplestore
 cd peoplestore && pipenv shell
-pipenv install django flake8 yapf requests
+pipenv install django flake8 yapf requests pytest
 python manage.py startapp people
 ```

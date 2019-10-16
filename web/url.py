@@ -23,6 +23,6 @@ def get(session: any, endpoint, *, params=None,
   except exceptions.ConnectionError:
     return {
         'result': 'error',
-        'reason': 'Retry Failure',
+        'reason': 'retry_failure',
         'endpoint': endpoint
     }
