@@ -2,7 +2,7 @@
 
 Stores information about people from a given endpoint.
 
-## Insallation
+## Installation
 
 You will need:
 
