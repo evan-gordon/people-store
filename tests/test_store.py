@@ -21,7 +21,6 @@ FOUR_VALID_PEOPLE = [
 def test_valid_phone_numbers_return_match():
   for x in VALID_PHONE_NUMBERS:
     person = Person({'number': x})
-    print(x)
     assert not store.validate_person_phone_number(person) is None
 
 def test_invalid_phone_numbers_return_none():
