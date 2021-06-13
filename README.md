@@ -1,5 +1,7 @@
 # People Store
 
+**One off demo project, not in active development**
+
 Stores information about people from a given endpoint.
 
 ## Installation
